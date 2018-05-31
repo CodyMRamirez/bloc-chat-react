@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 
 class RoomList extends Component {
   constructor(props) {
@@ -23,7 +23,9 @@ class RoomList extends Component {
   render() {
     return (
       this.state.rooms.map( (room, index) =>
-        <div>{room.name}</div>
+        <div key={index}>
+          {room.name}
+        </div>
       )
     );
   }
