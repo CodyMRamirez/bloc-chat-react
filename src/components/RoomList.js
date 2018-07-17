@@ -20,13 +20,34 @@ class RoomList extends Component {
     });
   }
 
+  createRoom() {
+    this.roomsRef.push({
+      name: this.element.value
+    });
+  }
+
   render() {
     return (
-      this.state.rooms.map( (room, index) =>
-        <div key={index}>
-          {room.name}
-        </div>
-      )
+      <section id="chat-rooms">
+      {
+        this.state.rooms.map( (room, index) =>
+          <div key={index}>
+            {room.name}
+          </div>
+        )
+      }
+        <section id="new-room">
+          <div className="create-room">
+            <form onSubmit = {() => this.createRoom()}>
+              <label>
+                Enter a new chat room name:
+                <input type="text" ref={el => this.element = el}/>
+              </label>
+              <input type="submit" value="Submit" />
+            </form>
+          </div>
+        </section>
+      </section>
     );
   }
 }
