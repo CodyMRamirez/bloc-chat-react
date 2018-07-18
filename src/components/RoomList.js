@@ -20,31 +20,35 @@ class RoomList extends Component {
     });
   }
 
-  createRoom() {
-    this.roomsRef.push({
-      name: this.element.value
-    });
-  }
+  createRoom(e) {
+    e.preventDefault();
+    if (this.element.value !== '') {
+      this.roomsRef.push({name: this.element.value});
+      } else {
+        alert('Please enter a room name');
+      }
+      this.element.value = '';
+    }
 
   render() {
     return (
       <section id="chat-rooms">
-      {
-        this.state.rooms.map( (room, index) =>
-          <div key={index}>
-            {room.name}
-          </div>
-        )
-      }
         <section id="new-room">
           <div className="create-room">
-            <form onSubmit = {() => this.createRoom()}>
+            <form onSubmit = {(e) => this.createRoom(e)}>
               <label>
                 Enter a new chat room name:
                 <input type="text" ref={el => this.element = el}/>
               </label>
               <input type="submit" value="Submit" />
             </form>
+            {
+              this.state.rooms.map( (room, index) =>
+                <div key={index}>
+                  {room.name}
+                </div>
+              )
+            }
           </div>
         </section>
       </section>
