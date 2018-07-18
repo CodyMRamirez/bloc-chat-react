@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-//import * as firebase from 'firebase';
 
 class RoomList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      rooms: [],
+      rooms: []
     };
 
     this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -21,31 +20,34 @@ class RoomList extends Component {
   }
 
   createRoom() {
-    this.roomsRef.push({
-      name: this.element.value
-    });
-  }
+    if (this.element.value !== '') {
+      this.roomsRef.push({name: this.element.value});
+      } else {
+        alert('Please enter a room name');
+      }
+      this.element.value = '';
+    }
 
   render() {
     return (
       <section id="chat-rooms">
-      {
-        this.state.rooms.map( (room, index) =>
-          <div key={index}>
-            {room.name}
-          </div>
-        )
-      }
         <section id="new-room">
           <div className="create-room">
             <form onSubmit = {() => this.createRoom()}>
               <label>
-                Enter a new chat room name:
+                New Chat Room:
                 <input type="text" ref={el => this.element = el}/>
               </label>
               <input type="submit" value="Submit" />
             </form>
           </div>
+          {
+            this.state.rooms.map( (room, index) =>
+              <div key={index} onClick={() => this.props.action(room.key)}>
+                {room.name}
+              </div>
+            )
+          }
         </section>
       </section>
     );
