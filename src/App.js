@@ -21,9 +21,9 @@ class App extends Component {
 
     this.state = {
       activeRoom: '',
-      roomName: ''
+      roomName: '',
+      messageVisible: false
     };
-
   }
 
   handleRoomClick(activeRoom, roomName) {
@@ -31,6 +31,7 @@ class App extends Component {
     const currentRoomName = roomName
     this.setState({activeRoom: currentRoom})
     this.setState({roomName: currentRoomName})
+    this.setState({messageVisible: true})
   }
 
   render() {
@@ -40,13 +41,17 @@ class App extends Component {
             <h1>Bloc Chat</h1>
           </header>
           <div className="Active-Room">
-            <p>{this.state.roomName}</p>
+            <h1>{this.state.roomName}</h1>
           </div>
 
-          <MessageList
-            firebase={ firebase }
-            activeRoom={this.state.activeRoom}
-          />
+          {
+            this.state.messageVisible
+            ? <MessageList
+              firebase={ firebase }
+              activeRoom={this.state.activeRoom}
+              />
+            : null
+          }
 
           <RoomList
             firebase={ firebase }

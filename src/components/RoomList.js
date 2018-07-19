@@ -5,7 +5,7 @@ class RoomList extends Component {
     super(props);
 
     this.state = {
-      rooms: []
+      rooms: [],
     };
 
     this.roomsRef = this.props.firebase.database().ref('rooms');
@@ -35,7 +35,7 @@ class RoomList extends Component {
       <section id="chat-rooms">
         <section id="new-room">
           <div className="create-room">
-            <form onSubmit = {() => this.createRoom()}>
+            <form onSubmit = {(e) => this.createRoom(e)}>
               <label>
                 New Chat Room:
                 <input type="text" ref={el => this.element = el}/>
