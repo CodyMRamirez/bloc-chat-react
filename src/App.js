@@ -21,13 +21,16 @@ class App extends Component {
 
     this.state = {
       activeRoom: '',
-    }
+      roomName: ''
+    };
 
   }
 
-  handleRoomClick(activeRoom) {
+  handleRoomClick(activeRoom, roomName) {
     const currentRoom = activeRoom
+    const currentRoomName = roomName
     this.setState({activeRoom: currentRoom})
+    this.setState({roomName: currentRoomName})
   }
 
   render() {
@@ -35,8 +38,10 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <h1>Bloc Chat</h1>
-            <p>{this.state.activeRoom}</p>
           </header>
+          <div className="Active-Room">
+            <p>{this.state.roomName}</p>
+          </div>
 
           <MessageList
             firebase={ firebase }
@@ -45,7 +50,7 @@ class App extends Component {
 
           <RoomList
             firebase={ firebase }
-            action={(a) => this.handleRoomClick(a)}
+            action={(a, n) => this.handleRoomClick(a, n)}
             activeRoom={this.state.activeRoom}
           />
 

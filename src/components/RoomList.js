@@ -19,13 +19,15 @@ class RoomList extends Component {
     });
   }
 
-  createRoom() {
+  createRoom(e) {
+    e.preventDefault();
     if (this.element.value !== '') {
       this.roomsRef.push({name: this.element.value});
       } else {
         alert('Please enter a room name');
       }
       this.element.value = '';
+      return false;
     }
 
   render() {
@@ -43,7 +45,7 @@ class RoomList extends Component {
           </div>
           {
             this.state.rooms.map( (room, index) =>
-              <div key={index} onClick={() => this.props.action(room.key)}>
+              <div key={index} onClick={() => this.props.action(room.key, room.name)}>
                 {room.name}
               </div>
             )
