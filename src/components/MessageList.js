@@ -41,12 +41,6 @@ class MessageList extends Component {
       return false;
     }
 
-  showMessages(e) {
-    e.preventDefault();
-    if (this.messagesRef.roomId === this.props.activeRoom) {
-      this.state.messages.map( (message, index) => {message.content})
-    }
-  }
 
   render() {
     return (

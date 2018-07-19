@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import * as firebase from 'firebase';
 
 class RoomList extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class RoomList extends Component {
         alert('Please enter a room name');
       }
       this.element.value = '';
+      return false;
     }
 
   render() {
@@ -36,26 +38,19 @@ class RoomList extends Component {
           <div className="create-room">
             <form onSubmit = {(e) => this.createRoom(e)}>
               <label>
-                New Chat Room:
+                Enter a new chat room name:
                 <input type="text" ref={el => this.element = el}/>
               </label>
               <input type="submit" value="Submit" />
             </form>
             {
               this.state.rooms.map( (room, index) =>
-                <div key={index}>
+                <div key={index} onClick={() => this.props.action(room.key, room.name)}>
                   {room.name}
                 </div>
               )
             }
           </div>
-          {
-            this.state.rooms.map( (room, index) =>
-              <div key={index} onClick={() => this.props.action(room.key, room.name)}>
-                {room.name}
-              </div>
-            )
-          }
         </section>
       </section>
     );
